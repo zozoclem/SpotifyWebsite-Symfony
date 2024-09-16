@@ -1013,6 +1013,6 @@ class __TwigTemplate_fa02b9be88ca5ef372ab4cf98add93f0 extends Template
         </table>
     {% endif %}
 {% endblock %}
-", "@WebProfiler/Collector/config.html.twig", "/home/iutbgdin/Bureau/projetIut/vendor/symfony/web-profiler-bundle/Resources/views/Collector/config.html.twig");
+", "@WebProfiler/Collector/config.html.twig", "/home/iutbgdin/Bureau/Symfony/my_project/vendor/symfony/web-profiler-bundle/Resources/views/Collector/config.html.twig");
     }
 }

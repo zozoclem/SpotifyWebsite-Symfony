@@ -1047,6 +1047,6 @@ $context["call"], "return", [], "any", false, false, false, 310) === false)) {
         </menu>
     </dialog>
 {% endblock %}
-", "@WebProfiler/Collector/workflow.html.twig", "/home/iutbgdin/Bureau/projetIut/vendor/symfony/web-profiler-bundle/Resources/views/Collector/workflow.html.twig");
+", "@WebProfiler/Collector/workflow.html.twig", "/home/iutbgdin/Bureau/Symfony/my_project/vendor/symfony/web-profiler-bundle/Resources/views/Collector/workflow.html.twig");
     }
 }
