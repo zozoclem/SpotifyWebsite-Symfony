@@ -15,6 +15,7 @@ return [
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/song' => [[['_route' => 'app_song', '_controller' => 'App\\Controller\\SongController::index'], null, null, null, false, false, null]],
+        '/spotify' => [[['_route' => 'app_spotify', '_controller' => 'App\\Controller\\SpotifyController::index'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
