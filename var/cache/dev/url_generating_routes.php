@@ -17,8 +17,8 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
-    'app_song' => [[], ['_controller' => 'App\\Controller\\SongController::index'], [], [['text', '/song']], [], [], []],
-    'app_spotify' => [[], ['_controller' => 'App\\Controller\\SpotifyController::index'], [], [['text', '/spotify']], [], [], []],
-    'App\Controller\SongController::index' => [[], ['_controller' => 'App\\Controller\\SongController::index'], [], [['text', '/song']], [], [], []],
-    'App\Controller\SpotifyController::index' => [[], ['_controller' => 'App\\Controller\\SpotifyController::index'], [], [['text', '/spotify']], [], [], []],
+    'search_artist' => [[], ['_controller' => 'App\\Controller\\ArtistController::searchArtist'], [], [['text', '/search-artist']], [], [], []],
+    'app_spotify' => [[], ['_controller' => 'App\\Controller\\SpotifyHomeController::index'], [], [['text', '/spotify']], [], [], []],
+    'App\Controller\ArtistController::searchArtist' => [[], ['_controller' => 'App\\Controller\\ArtistController::searchArtist'], [], [['text', '/search-artist']], [], [], []],
+    'App\Controller\SpotifyHomeController::index' => [[], ['_controller' => 'App\\Controller\\SpotifyHomeController::index'], [], [['text', '/spotify']], [], [], []],
 ];

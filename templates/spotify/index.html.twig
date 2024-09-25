@@ -90,7 +90,7 @@
             {% for album in albums.items|slice(3, 3) %}
                 <div class="album">
                     <img src="{{ album.images[0].url }}" alt="{{ album.name }}">
-                    <p>{{ album.name }}</p>
+                    <a href="album/{{album.id}}">{{ album.name }}</a>
                 </div>
             {% endfor %}
         </div>

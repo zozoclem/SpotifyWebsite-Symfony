@@ -14,8 +14,8 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
-        '/song' => [[['_route' => 'app_song', '_controller' => 'App\\Controller\\SongController::index'], null, null, null, false, false, null]],
-        '/spotify' => [[['_route' => 'app_spotify', '_controller' => 'App\\Controller\\SpotifyController::index'], null, null, null, false, false, null]],
+        '/search-artist' => [[['_route' => 'search_artist', '_controller' => 'App\\Controller\\ArtistController::searchArtist'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/spotify' => [[['_route' => 'app_spotify', '_controller' => 'App\\Controller\\SpotifyHomeController::index'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
