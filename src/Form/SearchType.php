@@ -12,9 +12,9 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('artistName', TextType::class, [
-                'label' => 'Entrez un nom d\'artiste',
-                'attr' => ['placeholder' => 'Entrer un nom d\'artiste']
+            ->add('searchValue', TextType::class, [
+                'label' => 'Entrez une valeur de recherche',
+                'attr' => ['placeholder' => 'Entrer votre recherche']
             ])
             ->add('search', SubmitType::class, ['label' => 'Rechercher']);
     }

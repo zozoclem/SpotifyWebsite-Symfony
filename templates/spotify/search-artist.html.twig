@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Artist Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .search-container {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .search-container form {
+            display: inline-block;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .search-container input[type="search"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .search-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #1db954;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .search-container button:hover {
+            background-color: #1aa34a;
+        }
+        .results {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .artist {
+            text-decoration: none;
+            color: #565643;
+            margin-bottom: 20px;
+            width: 300px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: center;
+        }
+        .artist img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <h1>Rechercher un artiste</h1>
+        {{ form_start(form)}}
+            {{ form_widget(form.searchValue) }}
+            {{ form_widget(form.search) }}
+        {{ form_end(form) }}
+    </div>
+    <div class="results">
+        {% if artists is defined %}
+            {% if artists|length > 0 %}
+                {% for artist in artists %}
+                    <a href="artist/{{artist.id}}" class="artist">
+                        <h2>{{ artist.name }}</h2>
+                        <p>Followers: {{ artist.followers.total }}</p>
+                        <p>Genres: {{ artist.genres|join(', ') }}</p>
+                        {% if artist.images|length > 0 %}
+                            <img src="{{ artist.images[1].url }}" alt="{{ artist.name }}">
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p>No artists found.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>

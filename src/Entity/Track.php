@@ -2,23 +2,70 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
+#[ORM\Table(name: 'tracks')]
 class Track
 {
+    #[ORM\Column(type: 'integer')]
     private int $discNumber;
+
+    #[ORM\Column(type: 'integer')]
     private int $durationMs;
+
+    #[ORM\Column(type: 'boolean')]
     private bool $explicit;
+
+    #[ORM\Column(type: 'string', length: 255)]
     private string $isrc;
+
+    #[ORM\Column(type: 'string', length: 255)]
     private string $spotifyUrl;
+
+    #[ORM\Column(type: 'string', length: 255)]
     private string $href;
+
+    #[ORM\Id]
+    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private string $id;
+
+    #[ORM\Column(type: 'boolean')]
     private bool $isLocal;
+
+    #[ORM\Column(type: 'string', length: 255)]
     private string $name;
+
+    #[ORM\Column(type: 'integer')]
     private int $popularity;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $previewUrl;
+
+    #[ORM\Column(type: 'integer')]
     private int $trackNumber;
+
+    #[ORM\Column(type: 'string', length: 50)]
     private string $type;
+
+    #[ORM\Column(type: 'string', length: 255)]
     private string $uri;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $pictureLink;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $albumId;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $albumName;
+
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    private ?string $albumType;
+
+    #[ORM\Column(type: 'json', nullable: true)]
+    private ?array $artists;
 
     public function __construct(
         int $discNumber,
@@ -35,7 +82,11 @@ class Track
         int $trackNumber,
         string $type,
         string $uri,
-        ?string $pictureLink
+        ?string $pictureLink,
+        ?string $albumId,
+        ?string $albumName,
+        ?string $albumType,
+        ?array $artists
     ) {
         $this->discNumber = $discNumber;
         $this->durationMs = $durationMs;
@@ -52,6 +103,10 @@ class Track
         $this->type = $type;
         $this->uri = $uri;
         $this->pictureLink = $pictureLink;
+        $this->albumId = $albumId;
+        $this->albumName = $albumName;
+        $this->albumType = $albumType;
+        $this->artists = $artists;
     }
 
     // Getters for all properties
