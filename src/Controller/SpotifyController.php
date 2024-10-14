@@ -11,8 +11,11 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Service\AuthSpotifyService;
-use App\Form\SearchType;
+use App\Form\SearchMusicType;
+use App\Form\SearchArtistType;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Favorite;
 
 
 
@@ -136,7 +139,7 @@ class SpotifyController extends AbstractController
 
     public function searchMusic(Request $request): Response
     {
-        $form = $this->createForm(SearchType::class);
+        $form = $this->createForm(SearchMusicType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -172,7 +175,7 @@ class SpotifyController extends AbstractController
     
     public function searchArtist(Request $request): Response
     {
-        $form = $this->createForm(SearchType::class);
+        $form = $this->createForm(SearchArtistType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -225,6 +228,22 @@ class SpotifyController extends AbstractController
             'artist' => $this->getSpotifyArtist($id),
             'albums' => $this->getSpotifyArtistAlbums($id),
         ]);
+    }
+
+    #[Route(path: '/favorite/add', name: 'favorite_add', methods: ['POST'])]
+    public function addFavorite(Request $request, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        $trackId = $request->request->get('track_id');
+
+        $favorite = new Favorite();
+        $favorite->setUser($user);
+        $favorite->setTrackId($trackId);
+
+        $em->persist($favorite);
+        $em->flush();
+
+        return $this->redirectToRoute('music_info', ['id' => $trackId]);
     }
 
     #[Route(path: '/spotify', name: 'app_spotify')]

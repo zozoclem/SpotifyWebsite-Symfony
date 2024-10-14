@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Artist Search</title>
+{% extends 'base.html.twig' %}
+
+{% block title %}Spotify Artist Search{% endblock %}
+
+{% block stylesheets %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,11 +66,12 @@
             border-radius: 10px;
         }
     </style>
-</head>
-<body>
+{% endblock %}
+
+{% block body %}
     <div class="search-container">
         <h1>Rechercher un artiste</h1>
-        {{ form_start(form)}}
+        {{ form_start(form) }}
             {{ form_widget(form.searchValue) }}
             {{ form_widget(form.search) }}
         {{ form_end(form) }}
@@ -80,7 +80,7 @@
         {% if artists is defined %}
             {% if artists|length > 0 %}
                 {% for artist in artists %}
-                    <a href="artist/{{artist.id}}" class="artist">
+                    <a href="artist/{{ artist.id }}" class="artist">
                         <h2>{{ artist.name }}</h2>
                         <p>Followers: {{ artist.followers.total }}</p>
                         <p>Genres: {{ artist.genres|join(', ') }}</p>
@@ -94,5 +94,4 @@
             {% endif %}
         {% endif %}
     </div>
-</body>
-</html>
+{% endblock %}
