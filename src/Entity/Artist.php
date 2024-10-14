@@ -4,12 +4,12 @@ namespace App\Entity;
 
 class Artist
 {
-    private array $externalUrls;
-    private array $followers;
+    private string $externalUrls;
+    private string $followers;
     private array $genres;
     private string $href;
     private string $id;
-    private array $images;
+    private string $images;
     private string $name;
     private int $popularity;
     private string $type;
@@ -17,12 +17,12 @@ class Artist
 
     // Constructor
     public function __construct(
-        array $externalUrls,
-        array $followers,
+        string $externalUrls,
+        string $followers,
         array $genres,
         string $href,
         string $id,
-        array $images,
+        string $images,
         string $name,
         int $popularity,
         string $type,
@@ -42,12 +42,12 @@ class Artist
 
     // Getters
 
-    public function getExternalUrls(): array
+    public function getExternalUrls(): string
     {
         return $this->externalUrls;
     }
 
-    public function getFollowers(): array
+    public function getFollowers(): string
     {
         return $this->followers;
     }
@@ -67,7 +67,7 @@ class Artist
         return $this->id;
     }
 
-    public function getImages(): array
+    public function getImages(): string
     {
         return $this->images;
     }

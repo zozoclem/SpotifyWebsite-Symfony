@@ -109,7 +109,6 @@ class Track
         $this->artists = $artists;
     }
 
-    // Getters for all properties
     public function getDiscNumber(): int
     {
         return $this->discNumber;
@@ -180,8 +179,28 @@ class Track
         return $this->uri;
     }
 
-    public function getPictureLink(): string
+    public function getPictureLink(): ?string
     {
         return $this->pictureLink;
+    }
+
+    public function getAlbumId(): ?string
+    {
+        return $this->albumId;
+    }
+
+    public function getAlbumName(): ?string
+    {
+        return $this->albumName;
+    }
+
+    public function getAlbumType(): ?string
+    {
+        return $this->albumType;
+    }
+
+    public function getArtists(): ?array
+    {
+        return $this->artists;
     }
 }

@@ -26,7 +26,7 @@ public function createMultipleFromSpotifyData(array $spotifyData): array
                 $spotifyData['genres'],
                 $spotifyData['href'],
                 $spotifyData['id'],
-                $spotifyData['images'][0]['url'] ?? null,
+                $spotifyData['images'][0]['url'] ?? '',
                 $spotifyData['name'],
                 $spotifyData['popularity'],
                 $spotifyData['type'],

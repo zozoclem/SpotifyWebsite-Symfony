@@ -21,7 +21,12 @@ return [
         '/search-music' => [[['_route' => 'search_music', '_controller' => 'App\\Controller\\SpotifyController::searchMusic'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/search-artist' => [[['_route' => 'search_artist', '_controller' => 'App\\Controller\\SpotifyController::searchArtist'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/favorite/add' => [[['_route' => 'favorite_add', '_controller' => 'App\\Controller\\SpotifyController::addFavorite'], null, ['POST' => 0], null, false, false, null]],
-        '/spotify' => [[['_route' => 'app_spotify', '_controller' => 'App\\Controller\\SpotifyController::index'], null, null, null, false, false, null]],
+        '/favorite/remove' => [[['_route' => 'favorite_remove', '_controller' => 'App\\Controller\\SpotifyController::removeFavorite'], null, ['POST' => 0], null, false, false, null]],
+        '/spotify' => [
+            [['_route' => 'app_spotify', '_controller' => 'App\\Controller\\SpotifyController::index'], null, null, null, false, false, null],
+            [['_route' => 'spotify', '_controller' => 'App\\Controller\\SpotifyController::index'], null, null, null, false, false, null],
+        ],
+        '/' => [[['_route' => 'redirect_root_to_spotify', 'route' => 'spotify', 'permanent' => true, '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController::redirectAction'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

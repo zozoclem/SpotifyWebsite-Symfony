@@ -46,17 +46,59 @@
         .track {
             margin-bottom: 20px;
             width: 300px;
-            background: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: inline-block;
             text-align: center;
             text-decoration: none;
-            color: black;
+            color: #fff;
+            position: relative;
+            transition: transform 0.3s;
         }
-        .track img {
-            max-width: 200px;
+        .track:hover {
+            transform: scale(1.05);
+            background: #333232;
+        }
+        .favorite-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .favorite-buttons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .favorite-buttons button i {
+            font-size: 24px; 
+        }
+        .play-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: none;
+        }
+        .track:hover .play-button {
+            display: flex;
+        }
+        .play-button button {
+            background-color: green;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .play-button button i {
+            color: black;
+            font-size: 24px;
+        }
+    .track img {
+            max-width: 100%;
             height: auto;
             border-radius: 10px;
         }
@@ -77,29 +119,38 @@
                 {% for track in tracks %}
                     <a href="music/{{ track.id }}" class="track">
                         <h2>{{ track.name }}</h2>
-                                                    <div class="favorite-buttons">
-                                <form action="{{ path('favorite_add') }}" method="post" style="display: inline;">
-                                    <input type="hidden" name="track_id" value="{{ track.id }}">
-                                    <button type="submit" style="background: none; border: none; cursor: pointer;">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                </form>
-                            </div>
+                        <div class="favorite-buttons">
+                            <form action="{{ path('favorite_add') }}" method="post" style="display: inline;">
+                                <input type="hidden" name="track_id" value="{{ track.id }}">
+                                <button type="submit">
+                                    {% if app.user.hasTrack(track.id) %}
+                                        <i class="fas fa-heart" style="color: #ff69b4;"></i>
+                                    {% else %}
+                                        <i class="far fa-heart" style="color: black;"></i>
+                                    {% endif %}
+                                </button>
+                            </form>
+                        </div>
                         {% if track.pictureLink %}
                             <img src="{{ track.pictureLink }}" alt="{{ track.name }}">
                         {% endif %}
-                        <p>Duration: {{ (track.durationMs / 1000)|round }} seconds</p>
-                        <p>Popularity: {{ track.popularity }}</p>
+                        <p>Durée : {{ (track.durationMs / 1000)|round }} secondes</p>
+                        <p>Popularité : {{ track.popularity }}</p>
                         {% if track.previewUrl %}
-                            <audio controls>
+                            <div class="play-button">
+                                <button onclick="event.stopPropagation(); event.preventDefault(); document.getElementById('audio-{{ track.id }}').play()">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <audio id="audio-{{ track.id }}" controls style="display: none;">
                                 <source src="{{ track.previewUrl }}" type="audio/mpeg">
-                                Your browser does not support the audio element.
+                                Votre navigateur ne supporte pas l'élément audio.
                             </audio>
                         {% endif %}
                     </a>
                 {% endfor %}
             {% else %}
-                <p>No tracks found.</p>
+                <p>Aucun morceau trouvé.</p>
             {% endif %}
         {% endif %}
     </div>

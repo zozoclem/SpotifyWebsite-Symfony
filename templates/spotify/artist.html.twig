@@ -69,23 +69,23 @@
             <h2>Albums</h2>
             {% for album in albums.items|slice(0, 3) %}
                 <div class="album">
-                    <img src="{{ album.images[0].url }}" alt="{{ album.name }}">
+                    <img src="{{ album.images }}" alt="{{ album.name }}">
                     <p>{{ album.name }}</p>
                 </div>
             {% endfor %}
         </div>
         <div class="artist-info">
             <h1>{{ artist.name }}</h1>
-            <p>Followers: {{ artist.followers.total }}</p>
+            <p>Followers: {{ artist.followers }}</p>
             <p>Genres: {{ artist.genres | join(', ') }}</p>
             <p>Popularity: {{ artist.popularity }}</p>
-            <img src="{{ artist.images[0].url }}" alt="{{ artist.name }}">
+            <img src="{{ artist.images }}" alt="{{ artist.name }}">
         </div>
         <div class="albums">
             <h2>Albums</h2>
             {% for album in albums.items|slice(3, 3) %}
                 <div class="album">
-                    <img src="{{ album.images[0].url }}" alt="{{ album.name }}">
+                    <img src="{{ album.images }}" alt="{{ album.name }}">
                     <p>{{ album.name }}</p>
                 </div>
             {% endfor %}

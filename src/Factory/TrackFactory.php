@@ -11,27 +11,7 @@ public function createMultipleFromSpotifyData(array $spotifyData): array
         $tracks = [];
 
         foreach ($spotifyData as $item) {
-            $track = new Track(
-                $item['disc_number'],
-                $item['duration_ms'],
-                $item['explicit'],
-                $item['external_ids']['isrc'],
-                $item['external_urls']['spotify'],
-                $item['href'],
-                $item['id'],
-                $item['is_local'],
-                $item['name'],
-                $item['popularity'],
-                $item['preview_url'] ?? null,
-                $item['track_number'],
-                $item['type'],
-                $item['uri'],
-                $item['album']['images'][0]['url'] ?? null,
-                $item['album']['id'] ?? null,
-                $item['album']['name'] ?? null,
-                $item['album']['type'] ?? null,
-                $item['artists']
-            );
+            $track = $this->createSimpleFromSpotifyData($item);
             $tracks[] = $track;
         }
 

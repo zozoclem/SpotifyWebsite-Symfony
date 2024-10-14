@@ -3,3 +3,14 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+redirect_root_to_spotify:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+    defaults:
+        route: spotify
+        permanent: true
+
+spotify:
+    path: /spotify
+    controller: App\Controller\SpotifyController::index
