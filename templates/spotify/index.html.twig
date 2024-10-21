@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Spotify Dashboard{% endblock %}
+{% block title %}Tableau de bord Spotify{% endblock %}
 
 {% block stylesheets %}
     <style>
@@ -27,7 +27,7 @@
             transition: background-color 0.3s ease;
         }
         .track:hover {
-            background-color: #333232 
+            background-color: #333232;
         }
         .track img {
             max-width: 100%;
@@ -37,7 +37,7 @@
         .track-name {
             font-size: 18px;
             margin: 10px 0;
-            color: #fff; 
+            color: #fff;
         }
         .artist-name {
             font-size: 14px;
@@ -48,13 +48,14 @@
             border: none;
             cursor: pointer;
             font-size: 1.5em;
-            color: #ff69b4; 
+            color: #ff69b4;
             position: absolute;
             top: 8px;
             right: 8px;
         }
         .remove-button:hover {
-            color: #ff1493; 
+            transform: scale(1.2);
+            color: #ff1493;
         }
     </style>
 {% endblock %}
@@ -65,22 +66,18 @@
         {% if user_favorites is not empty %}
             <div class="track-list">
                 {% for track in user_favorites %}
-                    <div class="track">
+                    <a href="music/{{ track.id }}" class="track">
                         <form action="{{ path('favorite_remove') }}" method="post" style="display: inline;">
                             <input type="hidden" name="track_id" value="{{ track.id }}">
                             <button type="submit" class="remove-button">
-                                {% if app.user and app.user.tracks.contains(track) %}
-                                    <i class="fas fa-heart" style="color: #ff69b4;"></i> 
-                                {% else %}
-                                    <i class="far fa-heart" style="color: #000;"></i> 
-                                {% endif %}
+                                <i class="fas fa-heart" style="color: #ff69b4;"></i>
                             </button>
                         </form>
                         {% if track.pictureLink %}
                             <img src="{{ track.pictureLink }}" alt="{{ track.name }}">
                         {% endif %}
                         <div class="track-name">{{ track.name }}</div>
-                    </div>
+                    </a>
                 {% endfor %}
             </div>
         {% else %}

@@ -16,8 +16,7 @@ use App\Form\SearchArtistType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\TrackRepository;
-use App\Entity\Favorite;
-
+use App\Factory\AlbumFactory;
 
 
 class SpotifyController extends AbstractController
@@ -25,16 +24,20 @@ class SpotifyController extends AbstractController
 
     private TrackFactory $trackFactory;
     private ArtistFactory $artistFactory;
+    private AlbumFactory $albumFactory;
+
     private string $token;
     public function __construct(
         private readonly AuthSpotifyService $authSpotifyService,
         private readonly HttpClientInterface $httpClient,
         TrackFactory $trackFactory,
         ArtistFactory $artistFactory,
+        AlbumFactory $albumFactory
     ) {
         $this->token = $this->authSpotifyService->auth();
         $this->trackFactory = $trackFactory;
         $this->artistFactory = $artistFactory;
+        $this->albumFactory = $albumFactory;
     }
 
 
@@ -52,9 +55,10 @@ class SpotifyController extends AbstractController
         );
 
         $data = $response->toArray();
-        $artistFactory = new ArtistFactory();
-        $artist = $artistFactory->createSimpleFromSpotifyData($data['artists'] ?? []);
 
+        $artistFactory = new ArtistFactory();
+        $artist = $artistFactory->createSimpleFromSpotifyData($data ?? []);
+        
         return $artist;
     }
 
@@ -76,7 +80,7 @@ class SpotifyController extends AbstractController
     }
 
 
-    public function getSpotifyArtistAlbums(string $id): array
+    public function getSpotifyArtistAlbums(string $id): Array
     {
 
         $response = $this->httpClient->request(
@@ -86,10 +90,19 @@ class SpotifyController extends AbstractController
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->token,
                 ],
+                'query' => [
+                    'limit' => 6,
+                ],
             ]
         );
 
-        return $response->toArray();
+        $data = $response->toArray();
+        
+
+        $albums = $this->albumFactory->createMultipleFromSpotifyData($data['items'] ?? []);
+
+
+        return $albums;
     }
 
 
@@ -257,16 +270,17 @@ public function addFavorite(Request $request, TrackRepository $trackRepository, 
     }
 
 
-    #[Route(path: '/artist/{id}', name: 'artist_info')]
+#[Route(path: '/artist/{id}', name: 'artist_info')]
+public function getArtistInfo(string $id): Response
+{
+    $artist = $this->getSpotifyArtist($id);
+    $albums = $this->getSpotifyArtistAlbums($id);
 
-
-    public function getArtistInfo(string $id): Response
-    {
-        return $this->render('spotify/artist.html.twig', [
-            'artist' => $this->getSpotifyArtist($id),
-            'albums' => $this->getSpotifyArtistAlbums($id),
-        ]);
-    }
+    return $this->render('spotify/artist.html.twig', [
+        'artist' => $artist,
+        'albums' => $albums,
+    ]);
+}
 
     #[Route(path: '/spotify', name: 'app_spotify')]
     public function index(): Response

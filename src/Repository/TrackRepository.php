@@ -7,14 +7,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * @extends ServiceEntityRepository<Track>
- *
- * @method Track|null find($id, $lockMode = null, $lockVersion = null)
- * @method Track|null findOneBy(array $criteria, array $orderBy = null)
- * @method Track[]    findAll()
- * @method Track[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class TrackRepository extends ServiceEntityRepository
 {
     private EntityManagerInterface $entityManager;
@@ -38,5 +30,4 @@ class TrackRepository extends ServiceEntityRepository
         return $this->find($id);
     }
 
-    // Ajoutez vos autres méthodes personnalisées ici
 }

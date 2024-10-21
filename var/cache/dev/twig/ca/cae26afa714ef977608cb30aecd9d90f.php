@@ -50,7 +50,7 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
 
         // line 1
         yield "<!DOCTYPE html>
-<html>
+<html lang=\"fr\">
 <head>
     <meta charset=\"UTF-8\">
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
@@ -64,47 +64,52 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
         // line 9
         yield "    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: #282828;
             color: #fff;
-            margin: 0;
             display: flex;
-            flex-direction: column; /* Ensure topbar is at the top */
-            height: 100vh; /* Full height */
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
         }
         .sidebar {
             background-color: #000;
-            padding: 20px;
+            padding: 1.25rem;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: fixed; 
-            top: 0;
+            position: fixed;
+            width: 250px;
+            height: 100vh;
             left: 0;
-            bottom: 0;
+            top: 0;
         }
         .sidebar img {
-            width: 150px;
-            margin-bottom: 20px;
+            width: 120px;
+            margin-bottom: 1.25rem;
         }
         .sidebar nav ul {
             list-style: none;
-            padding: 0;
             width: 100%;
         }
         .sidebar nav ul li {
-            margin: 15px 0;
+            margin: 1rem 0;
         }
         .sidebar nav ul li a {
             color: #b3b3b3;
             text-decoration: none;
-            padding: 10px;
+            padding: 0.75rem;
             border-radius: 5px;
             display: block;
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
         }
         .sidebar nav ul li a:hover {
             background-color: #282828;
@@ -112,110 +117,77 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
         }
         .topbar {
             display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: #282828;
-            z-index: 1000;
-            margin-left: 250px; /* Adjust according to sidebar width */
-            justify-content: flex-end;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            margin-left: 250px;
             height: 40px;
-            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
-        .topbar .user-info {
+        .user-info {
+            font-size: 0.875rem;
             display: flex;
             align-items: center;
-            background-color: #000;
-            border-radius: 15px;
-            padding: 5px 10px;
-            cursor: pointer;
-            position: relative;
         }
-        .topbar .user-info i {
-            margin-right: 10px;
-        }
-        .topbar .user-info:hover .dropdown-menu {
-            display: block;
-        }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: #000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            border-radius: 5px;
-            overflow: hidden;
-            z-index: 1001;
-        }
-        .dropdown-menu a {
-            color: #b3b3b3;
-            text-decoration: none;
-            padding: 10px;
-            display: block;
-            transition: background-color 0.3s;
-        }
-        .dropdown-menu a:hover {
-            background-color: #282828;
-            color: #fff;
+        .user-info i {
+            margin-right: 0.5rem;
         }
         .main-content {
-            background-color: #282828;
             flex-grow: 1;
-            padding: 20px;
-            margin-left: 250px; /* Adjust according to sidebar width */
-            margin-top: 40px; /* Adjust according to topbar height */
-            height: calc(100vh - 60px); /* Full height minus topbar height */
-            overflow-y: auto; /* Scroll if content overflows */
+            padding: 1.25rem;
+            margin-left: 250px;
+            margin-top: 40px;
+            overflow-y: auto;
+            background-color: #282828;
         }
     </style>
 </head>
 <body>
-    <div class=\"sidebar\">
+    <aside class=\"sidebar\" aria-label=\"Navigation Sidebar\">
         <img src=\"";
-        // line 116
+        // line 90
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("images/spotify_logo.png"), "html", null, true);
-        yield "\" alt=\"Spotify Logo\">
+        yield "\" alt=\"Logo Spotify\">
         <nav>
             <ul>
                 <li><a href=\"";
-        // line 119
+        // line 93
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_spotify");
         yield "\">Accueil</a></li>
                 <li><a href=\"";
-        // line 120
+        // line 94
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("search_artist");
-        yield "\">Rechercher un Artiste</a></li>
+        yield "\">Artistes</a></li>
                 <li><a href=\"";
-        // line 121
+        // line 95
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("search_music");
-        yield "\">Rechercher une Musique</a></li>
+        yield "\">Musiques</a></li>
+                <li><a href=\"";
+        // line 96
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
+        yield "\">Déconnexion</a></li>
             </ul>
         </nav>
-    </div>
-    <div class=\"topbar\">
+    </aside>
+    <header class=\"topbar\">
         <div class=\"user-info\">
             <i class=\"fas fa-user-circle\"></i>
-            <span>";
-        // line 128
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 128, $this->source); })()), "user", [], "any", false, false, false, 128), "getUserIdentifier", [], "method", false, false, false, 128), "html", null, true);
+            <span>Connecté en tant que ";
+        // line 103
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 103, $this->source); })()), "user", [], "any", false, false, false, 103), "getUserIdentifier", [], "method", false, false, false, 103), "html", null, true);
         yield "</span>
-            <div class=\"dropdown-menu\">
-                <a href=\"";
-        // line 130
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
-        yield "\">Logout</a>
-            </div>
         </div>
-    </div>
-    <div class=\"main-content\">
+    </header>
+    <main class=\"main-content\">
         ";
-        // line 135
+        // line 107
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 136
-        yield "    </div>
+        // line 108
+        yield "    </main>
     ";
-        // line 137
+        // line 109
         yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
-        // line 138
+        // line 110
         yield "</body>
 </html>";
         
@@ -272,7 +244,7 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
         yield from [];
     }
 
-    // line 135
+    // line 107
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -294,7 +266,7 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
         yield from [];
     }
 
-    // line 137
+    // line 109
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -337,13 +309,13 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  298 => 137,  276 => 135,  254 => 8,  231 => 6,  219 => 138,  217 => 137,  214 => 136,  212 => 135,  204 => 130,  199 => 128,  189 => 121,  185 => 120,  181 => 119,  175 => 116,  66 => 9,  64 => 8,  59 => 6,  52 => 1,);
+        return array (  270 => 109,  248 => 107,  226 => 8,  203 => 6,  191 => 110,  189 => 109,  186 => 108,  184 => 107,  177 => 103,  167 => 96,  163 => 95,  159 => 94,  155 => 93,  149 => 90,  66 => 9,  64 => 8,  59 => 6,  52 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("<!DOCTYPE html>
-<html>
+<html lang=\"fr\">
 <head>
     <meta charset=\"UTF-8\">
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
@@ -351,47 +323,52 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
     <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css\">
     {% block stylesheets %}{% endblock %}
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: #282828;
             color: #fff;
-            margin: 0;
             display: flex;
-            flex-direction: column; /* Ensure topbar is at the top */
-            height: 100vh; /* Full height */
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
         }
         .sidebar {
             background-color: #000;
-            padding: 20px;
+            padding: 1.25rem;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: fixed; 
-            top: 0;
+            position: fixed;
+            width: 250px;
+            height: 100vh;
             left: 0;
-            bottom: 0;
+            top: 0;
         }
         .sidebar img {
-            width: 150px;
-            margin-bottom: 20px;
+            width: 120px;
+            margin-bottom: 1.25rem;
         }
         .sidebar nav ul {
             list-style: none;
-            padding: 0;
             width: 100%;
         }
         .sidebar nav ul li {
-            margin: 15px 0;
+            margin: 1rem 0;
         }
         .sidebar nav ul li a {
             color: #b3b3b3;
             text-decoration: none;
-            padding: 10px;
+            padding: 0.75rem;
             border-radius: 5px;
             display: block;
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
         }
         .sidebar nav ul li a:hover {
             background-color: #282828;
@@ -399,85 +376,52 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
         }
         .topbar {
             display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: #282828;
-            z-index: 1000;
-            margin-left: 250px; /* Adjust according to sidebar width */
-            justify-content: flex-end;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            margin-left: 250px;
             height: 40px;
-            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
-        .topbar .user-info {
+        .user-info {
+            font-size: 0.875rem;
             display: flex;
             align-items: center;
-            background-color: #000;
-            border-radius: 15px;
-            padding: 5px 10px;
-            cursor: pointer;
-            position: relative;
         }
-        .topbar .user-info i {
-            margin-right: 10px;
-        }
-        .topbar .user-info:hover .dropdown-menu {
-            display: block;
-        }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: #000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            border-radius: 5px;
-            overflow: hidden;
-            z-index: 1001;
-        }
-        .dropdown-menu a {
-            color: #b3b3b3;
-            text-decoration: none;
-            padding: 10px;
-            display: block;
-            transition: background-color 0.3s;
-        }
-        .dropdown-menu a:hover {
-            background-color: #282828;
-            color: #fff;
+        .user-info i {
+            margin-right: 0.5rem;
         }
         .main-content {
-            background-color: #282828;
             flex-grow: 1;
-            padding: 20px;
-            margin-left: 250px; /* Adjust according to sidebar width */
-            margin-top: 40px; /* Adjust according to topbar height */
-            height: calc(100vh - 60px); /* Full height minus topbar height */
-            overflow-y: auto; /* Scroll if content overflows */
+            padding: 1.25rem;
+            margin-left: 250px;
+            margin-top: 40px;
+            overflow-y: auto;
+            background-color: #282828;
         }
     </style>
 </head>
 <body>
-    <div class=\"sidebar\">
-        <img src=\"{{ asset('images/spotify_logo.png') }}\" alt=\"Spotify Logo\">
+    <aside class=\"sidebar\" aria-label=\"Navigation Sidebar\">
+        <img src=\"{{ asset('images/spotify_logo.png') }}\" alt=\"Logo Spotify\">
         <nav>
             <ul>
                 <li><a href=\"{{ path('app_spotify') }}\">Accueil</a></li>
-                <li><a href=\"{{ path('search_artist') }}\">Rechercher un Artiste</a></li>
-                <li><a href=\"{{ path('search_music') }}\">Rechercher une Musique</a></li>
+                <li><a href=\"{{ path('search_artist') }}\">Artistes</a></li>
+                <li><a href=\"{{ path('search_music') }}\">Musiques</a></li>
+                <li><a href=\"{{ path('app_logout') }}\">Déconnexion</a></li>
             </ul>
         </nav>
-    </div>
-    <div class=\"topbar\">
+    </aside>
+    <header class=\"topbar\">
         <div class=\"user-info\">
             <i class=\"fas fa-user-circle\"></i>
-            <span>{{ app.user.getUserIdentifier() }}</span>
-            <div class=\"dropdown-menu\">
-                <a href=\"{{ path('app_logout') }}\">Logout</a>
-            </div>
+            <span>Connecté en tant que {{ app.user.getUserIdentifier() }}</span>
         </div>
-    </div>
-    <div class=\"main-content\">
+    </header>
+    <main class=\"main-content\">
         {% block body %}{% endblock %}
-    </div>
+    </main>
     {% block javascripts %}{% endblock %}
 </body>
 </html>", "base.html.twig", "/home/iutbgdin/Bureau/Symfony/templates/base.html.twig");

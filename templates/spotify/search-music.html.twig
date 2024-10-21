@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Spotify Search Music{% endblock %}
+{% block title %}Recherche de musique Spotify{% endblock %}
 
 {% block stylesheets %}
     <style>
@@ -10,7 +10,6 @@
         }
         .search-container form {
             display: inline-block;
-            background: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -73,6 +72,11 @@
         .favorite-buttons button i {
             font-size: 24px; 
         }
+
+        .favorite-buttons button:hover {
+            transform: scale(1.2);
+            color: #1db954; 
+        }
         .play-button {
             position: absolute;
             bottom: 10px;
@@ -97,7 +101,11 @@
             color: black;
             font-size: 24px;
         }
-    .track img {
+        .play-button button:hover {
+            transform: scale(1.2);
+            background-color: #1aa34a;
+        }
+        .track img {
             max-width: 100%;
             height: auto;
             border-radius: 10px;

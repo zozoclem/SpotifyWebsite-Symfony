@@ -378,10 +378,12 @@
       <argument type="service" id=".debug.http_client"/>
       <argument type="service" id="App\Factory\TrackFactory"/>
       <argument type="service" id="App\Factory\ArtistFactory"/>
+      <argument type="service" id="App\Factory\AlbumFactory"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.QaaoWjx.App\Controller\SpotifyController"/>
       </call>
     </service>
+    <service id="App\Factory\AlbumFactory" class="App\Factory\AlbumFactory" autowire="true" autoconfigure="true"/>
     <service id="App\Factory\ArtistFactory" class="App\Factory\ArtistFactory" autowire="true" autoconfigure="true"/>
     <service id="App\Factory\TrackFactory" class="App\Factory\TrackFactory" autowire="true" autoconfigure="true"/>
     <service id="App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true">

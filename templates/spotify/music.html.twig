@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Music{% endblock %}
+{% block title %}Musique{% endblock %}
 
 {% block stylesheets %}
 <style>
@@ -14,7 +14,6 @@
         font-size: 16px; 
     }
     .container {
-        background-color: #fff;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -35,18 +34,43 @@
     .recommendations {
         margin-top: 40px;
     }
-    .recommendation {
-        background-color: #fff;
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        margin-bottom: 10px;
-        text-align: center;
-        width: 100px;
-        display: inline-block;
+    .recommendations-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
     }
+    .recommendation {
+            margin-bottom: 20px;
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            position: relative;
+            transition: transform 0.3s;
+    }
+
+    .recommendation:hover {
+            background-color: #333232 
+        }
+
+    .spotify_listen {
+        text-decoration: none;
+        color: green;
+        display: block; 
+        margin: 10px 0; 
+    }
+
+    .spotify_listen:hover {
+        color: #1db954; 
+    }
+
     h1, h2, p {
-        color: #333; 
+        color: #fff; 
         padding: 5px; 
     }
 </style>
@@ -55,20 +79,24 @@
 {% block body %}
     <div class="container">
         <div class="track-info">
-            <h1>{{ track.name }}</h1>
-            <p>Duration: {{ track.durationMs / 1000 }} seconds</p>
-            <p>Explicit: {{ track.explicit ? 'Yes' : 'No' }}</p>
-            <p>Popularity: {{ track.popularity }}</p>
-            <img src="{{ track.pictureLink }}" alt="{{ track.name }}">
+            <h1>{{ track.getName() }}</h1>
+            <p>Album : {{ track.getAlbumName() }}</p>
+            <p>Durée : {{ track.getDurationMs() / 1000 }} secondes</p>
+            <p>Nombre de disque : {{ track.getDiscNumber() }}</p>
+            <p>Popularité : {{ track.getPopularity() }}</p>
+            <a href="{{ track.getSpotifyUrl() }}" class="spotify_listen">Ecouter sur spotify </a>
+            <img src="{{ track.getPictureLink() }}" alt="{{ track.getName() }}">
         </div>
         <div class="recommendations">
-            <h2>Recommendations</h2>
-            {% for recommendation in recommendations %}
-                <div class="recommendation">
-                    <img src="{{ recommendation.pictureLink }}" alt="{{ recommendation.name }}">
-                    <p>{{ recommendation.name }}</p>
-                </div>
-            {% endfor %}
+            <h2>Recommandations</h2>
+            <div class="recommendations-container">
+                {% for recommendation in recommendations %}
+                    <a href="/music/{{ recommendation.getId() }}" class="recommendation">
+                        <img src="{{ recommendation.getPictureLink() }}" alt="{{ recommendation.name }}">
+                        <p>{{ recommendation.getName() }}</p>
+                    </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

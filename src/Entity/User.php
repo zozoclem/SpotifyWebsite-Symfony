@@ -1,5 +1,5 @@
 <?php
-// src/Entity/User.php
+
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -56,19 +56,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
+
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -108,9 +101,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Track>
-     */
     public function getTracks(): Collection
     {
         return $this->tracks;
@@ -142,12 +132,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
     }
 }
