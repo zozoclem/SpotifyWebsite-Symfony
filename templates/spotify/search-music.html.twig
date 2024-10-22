@@ -128,16 +128,21 @@
                     <a href="music/{{ track.id }}" class="track">
                         <h2>{{ track.name }}</h2>
                         <div class="favorite-buttons">
+                            {% if app.user.hasTrack(track.id) %}
+                            <form action="{{ path('favorite_track_remove') }}" method="post" style="display: inline;">
+                                <input type="hidden" name="track_id" value="{{ track.id }}">
+                                <button type="submit">
+                                    <i class="fas fa-heart" style="color: #ff69b4;"></i>
+                                </button>
+                            </form>
+                            {% else %}
                             <form action="{{ path('favorite_track_add') }}" method="post" style="display: inline;">
                                 <input type="hidden" name="track_id" value="{{ track.id }}">
                                 <button type="submit">
-                                    {% if app.user.hasTrack(track.id) %}
-                                        <i class="fas fa-heart" style="color: #ff69b4;"></i>
-                                    {% else %}
-                                        <i class="far fa-heart" style="color: black;"></i>
-                                    {% endif %}
+                                    <i class="far fa-heart" style="color: black;"></i>
                                 </button>
                             </form>
+                            {% endif %}
                         </div>
                         {% if track.pictureLink %}
                             <img src="{{ track.pictureLink }}" alt="{{ track.name }}">
