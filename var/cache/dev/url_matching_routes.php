@@ -14,20 +14,20 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/search-artist' => [[['_route' => 'search_artist', '_controller' => 'App\\Controller\\ArtistController::searchArtist'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/favorite/artist/add' => [[['_route' => 'favorite_artist_add', '_controller' => 'App\\Controller\\ArtistController::addFavoriteArtist'], null, ['POST' => 0], null, false, false, null]],
+        '/favorite/artist/remove' => [[['_route' => 'favorite_artist_remove', '_controller' => 'App\\Controller\\ArtistController::removeFavoriteArtist'], null, ['POST' => 0], null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
         '/verify/email' => [[['_route' => 'app_verify_email', '_controller' => 'App\\Controller\\RegistrationController::verifyUserEmail'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
-        '/search-music' => [[['_route' => 'search_music', '_controller' => 'App\\Controller\\SpotifyController::searchMusic'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        '/search-artist' => [[['_route' => 'search_artist', '_controller' => 'App\\Controller\\SpotifyController::searchArtist'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        '/favorite/track/add' => [[['_route' => 'favorite_track_add', '_controller' => 'App\\Controller\\SpotifyController::addFavoriteTrack'], null, ['POST' => 0], null, false, false, null]],
-        '/favorite/track/remove' => [[['_route' => 'favorite_track_remove', '_controller' => 'App\\Controller\\SpotifyController::removeFavoriteTrack'], null, ['POST' => 0], null, false, false, null]],
-        '/favorite/artist/add' => [[['_route' => 'favorite_artist_add', '_controller' => 'App\\Controller\\SpotifyController::addFavoriteArtist'], null, ['POST' => 0], null, false, false, null]],
-        '/favorite/artist/remove' => [[['_route' => 'favorite_artist_remove', '_controller' => 'App\\Controller\\SpotifyController::removeFavoriteArtist'], null, ['POST' => 0], null, false, false, null]],
         '/spotify' => [
             [['_route' => 'app_spotify', '_controller' => 'App\\Controller\\SpotifyController::index'], null, null, null, false, false, null],
             [['_route' => 'spotify', '_controller' => 'App\\Controller\\SpotifyController::index'], null, null, null, false, false, null],
         ],
+        '/search-music' => [[['_route' => 'search_music', '_controller' => 'App\\Controller\\TrackController::searchMusic'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/favorite/track/add' => [[['_route' => 'favorite_track_add', '_controller' => 'App\\Controller\\TrackController::addFavoriteTrack'], null, ['POST' => 0], null, false, false, null]],
+        '/favorite/track/remove' => [[['_route' => 'favorite_track_remove', '_controller' => 'App\\Controller\\TrackController::removeFavoriteTrack'], null, ['POST' => 0], null, false, false, null]],
         '/' => [[['_route' => 'redirect_root_to_spotify', 'route' => 'spotify', 'permanent' => true, '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController::redirectAction'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
@@ -50,8 +50,8 @@ return [
                         .')'
                     .')'
                 .')'
-                .'|/music/([^/]++)(*:217)'
-                .'|/artist/([^/]++)(*:241)'
+                .'|/artist/([^/]++)(*:218)'
+                .'|/music/([^/]++)(*:241)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -63,9 +63,9 @@ return [
         168 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         181 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         191 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        217 => [[['_route' => 'music_info', '_controller' => 'App\\Controller\\SpotifyController::getMusicInfo'], ['id'], null, null, false, true, null]],
+        218 => [[['_route' => 'artist_info', '_controller' => 'App\\Controller\\ArtistController::getArtistInfo'], ['id'], null, null, false, true, null]],
         241 => [
-            [['_route' => 'artist_info', '_controller' => 'App\\Controller\\SpotifyController::getArtistInfo'], ['id'], null, null, false, true, null],
+            [['_route' => 'music_info', '_controller' => 'App\\Controller\\TrackController::getMusicInfo'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],
