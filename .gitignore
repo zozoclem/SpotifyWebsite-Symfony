@@ -1,25 +1,55 @@
-
-###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
+# Symfony
 /var/
 /vendor/
-###< symfony/framework-bundle ###
+/public/bundles/
+/public/uploads/
+/node_modules/
+/.env
+/.env.local
+/.env.*.local
+/.env.*.dev.local
+/.env.test.local
 
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###
+# Symfony cache
+/cache/*
+!cache/dev/
+!cache/test/
+!cache/prod/
 
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
+# Logs
+/logs/*
+!.gitkeep
 
-###> symfony/asset-mapper ###
+# Assets
 /public/assets/
-/assets/vendor/
-###< symfony/asset-mapper ###
+public/hot
+/public/build
+/public/uploads
+
+# Configuration files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# PHPStorm
+*.iml
+*.idea/
+
+# Mac OS X
+.DS_Store
+
+# Linux
+*~
+*.swp
+
+# IDE configuration files
+/.phpunit.result.cache
+/.phpunit.result.cache/
+
+# Composer
+composer.lock
+composer.phar
+
+# Test files
+/tests/Results/

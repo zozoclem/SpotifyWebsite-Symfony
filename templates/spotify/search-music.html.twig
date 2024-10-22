@@ -151,8 +151,8 @@
                         <p>Popularité : {{ track.popularity }}</p>
                         {% if track.previewUrl %}
                             <div class="play-button">
-                                <button onclick="event.stopPropagation(); event.preventDefault(); document.getElementById('audio-{{ track.id }}').play()">
-                                    <i class="fas fa-play"></i>
+                                <button onclick="togglePlayPause('{{ track.id }}')">
+                                    <i class="fas fa-play" id="play-icon-{{ track.id }}"></i>
                                 </button>
                             </div>
                             <audio id="audio-{{ track.id }}" controls style="display: none;">
@@ -167,4 +167,23 @@
             {% endif %}
         {% endif %}
     </div>
+
+    {% block script %}
+        <script>
+            function togglePlayPause(trackId) {
+                const audioElement = document.getElementById('audio-' + trackId);
+                const playIcon = document.getElementById('play-icon-' + trackId);
+
+                if (audioElement.paused) {
+                    audioElement.play();
+                    playIcon.classList.remove('fa-play');
+                    playIcon.classList.add('fa-pause');
+                } else {
+                    audioElement.pause();
+                    playIcon.classList.remove('fa-pause');
+                    playIcon.classList.add('fa-play');
+                }
+            }
+        </script>
+    {% endblock %}
 {% endblock %}

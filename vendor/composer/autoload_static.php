@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit47d6ed777b8832bc1c52739752beb02b
+class ComposerStaticInita89b78bdecd3d75fa503de56b308fa6a
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -206,8 +206,8 @@ class ComposerStaticInit47d6ed777b8832bc1c52739752beb02b
     public static $prefixDirsPsr4 = array (
         'phpDocumentor\\Reflection\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Webmozart\\Assert\\' => 
@@ -524,8 +524,8 @@ class ComposerStaticInit47d6ed777b8832bc1c52739752beb02b
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\EventDispatcher\\' => 
         array (
@@ -565,9 +565,9 @@ class ComposerStaticInit47d6ed777b8832bc1c52739752beb02b
         ),
         'League\\Uri\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/uri',
+            0 => __DIR__ . '/..' . '/league/uri-parser/src',
             1 => __DIR__ . '/..' . '/league/uri-interfaces',
-            2 => __DIR__ . '/..' . '/league/uri-parser/src',
+            2 => __DIR__ . '/..' . '/league/uri',
         ),
         'Kelunik\\Certificate\\' => 
         array (
@@ -1357,9 +1357,9 @@ class ComposerStaticInit47d6ed777b8832bc1c52739752beb02b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit47d6ed777b8832bc1c52739752beb02b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit47d6ed777b8832bc1c52739752beb02b::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit47d6ed777b8832bc1c52739752beb02b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita89b78bdecd3d75fa503de56b308fa6a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita89b78bdecd3d75fa503de56b308fa6a::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInita89b78bdecd3d75fa503de56b308fa6a::$classMap;
 
         }, null, ClassLoader::class);
     }
