@@ -32,6 +32,7 @@ class ArtistController extends AbstractController
     }
 
     #[Route(path: '/artist/{id}', name: 'artist_info')]
+    //Récupére les informations d'un artiste (avec ses albums)
     public function getArtistInfo(string $id): Response
     {
         $artist = $this->ArtistSpotifyService->getArtist($this->token, $id);
@@ -44,6 +45,7 @@ class ArtistController extends AbstractController
     }
 
     #[Route(path: '/search-artist', name: 'search_artist', methods: ['GET', 'POST'])]
+    //Recherche un artiste
     public function searchArtist(Request $request): Response
     {
         $form = $this->createForm(SearchArtistType::class);
@@ -66,6 +68,7 @@ class ArtistController extends AbstractController
         ]);
     }
 
+    //Ajoute un artiste aux favoris
     #[Route(path: '/favorite/artist/add', name: 'favorite_artist_add', methods: ['POST'])]
     public function addFavoriteArtist(Request $request, ArtistRepository $artistRepository, EntityManagerInterface $em): Response
     {
@@ -86,6 +89,7 @@ class ArtistController extends AbstractController
     }
 
     #[Route(path: '/favorite/artist/remove', name: 'favorite_artist_remove', methods: ['POST'])]
+    //Supprime un artiste des favoris
     public function removeFavoriteArtist(Request $request, ArtistRepository $artistRepository, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();

@@ -17,6 +17,7 @@ class TrackRepository extends ServiceEntityRepository
         $this->entityManager = $entityManager;
     }
 
+    // Ajoute un Track à la base de données
     public function addTrack(Track $track): void
     {
         if($track){ 
@@ -25,6 +26,7 @@ class TrackRepository extends ServiceEntityRepository
         } 
     }
 
+    // Trouve un Track par son ID
     public function findOneByTrackID(string $id): ?Track
     {
         return $this->find($id);

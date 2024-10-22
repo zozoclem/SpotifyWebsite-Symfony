@@ -167,10 +167,14 @@
             {% endif %}
         {% endif %}
     </div>
-
     {% block script %}
         <script>
             function togglePlayPause(trackId) {
+
+                // Empêche la redirection vers la musique
+                event.stopPropagation(); 
+                event.preventDefault();
+                
                 const audioElement = document.getElementById('audio-' + trackId);
                 const playIcon = document.getElementById('play-icon-' + trackId);
 

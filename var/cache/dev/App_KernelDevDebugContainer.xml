@@ -370,7 +370,6 @@
     <service id="App\Controller\RegistrationController" class="App\Controller\RegistrationController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
-      <argument type="service" id="App\Security\EmailVerifier"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.QaaoWjx.App\Controller\RegistrationController"/>
       </call>
@@ -472,7 +471,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.BBUrFnP"/>
+      <argument type="service" id=".service_locator.EOZF1Ir"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3417,7 +3416,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.BBUrFnP"/>
+      <argument type="service" id=".service_locator.EOZF1Ir"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -8057,18 +8056,6 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.QVAk1vM" method="withContext"/>
     </service>
-    <service id=".service_locator.fdTWzgN" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="translator" type="service_closure" id="translator.data_collector"/>
-      </argument>
-    </service>
-    <service id=".service_locator.fdTWzgN.App\Controller\RegistrationController::verifyUserEmail()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\RegistrationController::verifyUserEmail()"/>
-      <argument>App\Controller\RegistrationController::verifyUserEmail()</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.fdTWzgN" method="withContext"/>
-    </service>
     <service id=".service_locator.mXDaS5b" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8100,7 +8087,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.B373W1m" method="withContext"/>
     </service>
-    <service id=".service_locator.BBUrFnP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.EOZF1Ir" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
@@ -8110,7 +8097,6 @@
         <argument key="App\Controller\ArtistController::addFavoriteArtist" type="service_closure" id=".service_locator.ZSkv38C.App\Controller\ArtistController::addFavoriteArtist()"/>
         <argument key="App\Controller\ArtistController::removeFavoriteArtist" type="service_closure" id=".service_locator.ZSkv38C.App\Controller\ArtistController::removeFavoriteArtist()"/>
         <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.QVAk1vM.App\Controller\RegistrationController::register()"/>
-        <argument key="App\Controller\RegistrationController::verifyUserEmail" type="service_closure" id=".service_locator.fdTWzgN.App\Controller\RegistrationController::verifyUserEmail()"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.mXDaS5b.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\TrackController::addFavoriteTrack" type="service_closure" id=".service_locator.B373W1m.App\Controller\TrackController::addFavoriteTrack()"/>
         <argument key="App\Controller\TrackController::removeFavoriteTrack" type="service_closure" id=".service_locator.B373W1m.App\Controller\TrackController::removeFavoriteTrack()"/>
@@ -8119,7 +8105,6 @@
         <argument key="App\Controller\ArtistController:addFavoriteArtist" type="service_closure" id=".service_locator.ZSkv38C.App\Controller\ArtistController::addFavoriteArtist()"/>
         <argument key="App\Controller\ArtistController:removeFavoriteArtist" type="service_closure" id=".service_locator.ZSkv38C.App\Controller\ArtistController::removeFavoriteArtist()"/>
         <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.QVAk1vM.App\Controller\RegistrationController::register()"/>
-        <argument key="App\Controller\RegistrationController:verifyUserEmail" type="service_closure" id=".service_locator.fdTWzgN.App\Controller\RegistrationController::verifyUserEmail()"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.mXDaS5b.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\TrackController:addFavoriteTrack" type="service_closure" id=".service_locator.B373W1m.App\Controller\TrackController::addFavoriteTrack()"/>
         <argument key="App\Controller\TrackController:removeFavoriteTrack" type="service_closure" id=".service_locator.B373W1m.App\Controller\TrackController::removeFavoriteTrack()"/>
@@ -10261,7 +10246,7 @@
     <service id="SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface" alias="symfonycasts.verify_email.helper"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.BBUrFnP"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.EOZF1Ir"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10306,7 +10291,6 @@
     <service id=".service_locator.diNoEIK" alias=".service_locator.4wc4Ag1"/>
     <service id=".service_locator.nmKF657" alias=".service_locator.ZSkv38C"/>
     <service id=".service_locator._I.kJlJ" alias=".service_locator.QVAk1vM"/>
-    <service id=".service_locator.UQkiy2u" alias=".service_locator.fdTWzgN"/>
     <service id=".service_locator...2Ndi3" alias=".service_locator.mXDaS5b"/>
     <service id=".service_locator.8AMsGgt" alias=".service_locator.B373W1m"/>
     <service id=".service_locator.b491maD" alias=".service_locator.QaaoWjx"/>

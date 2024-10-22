@@ -17,6 +17,7 @@ class ArtistRepository extends ServiceEntityRepository
         $this->entityManager = $entityManager;
     }
 
+    // Ajoute un Artist à la base de données
     public function addArtist(Artist $artist): void
     {
         if ($artist) {
@@ -25,6 +26,7 @@ class ArtistRepository extends ServiceEntityRepository
         }
     }
 
+    // Trouve un Artist par son ID
     public function findOneByArtistID(string $id): ?Artist
     {
         return $this->find($id);
