@@ -4,9 +4,9 @@ namespace App\Factory;
 
 use App\Entity\Artist;
 
-class ArtistFactory {
-
-public function createMultipleFromSpotifyData(array $spotifyData): array
+class ArtistFactory
+{
+    public function createMultipleFromSpotifyData(array $spotifyData): array
     {
         $artists = [];
 
@@ -19,21 +19,19 @@ public function createMultipleFromSpotifyData(array $spotifyData): array
 
     public function createSimpleFromSpotifyData(array $spotifyData): Artist
     {
-
-            $artist = new Artist(
-                $spotifyData['external_urls']['spotify'],
-                $spotifyData['followers']['total'],
-                $spotifyData['genres'],
-                $spotifyData['href'],
-                $spotifyData['id'],
-                $spotifyData['images'][0]['url'] ?? '',
-                $spotifyData['name'],
-                $spotifyData['popularity'],
-                $spotifyData['type'],
-                $spotifyData['uri']
-            );
+        $artist = new Artist(
+            $spotifyData['id'],
+            $spotifyData['external_urls']['spotify'],
+            $spotifyData['followers']['total'], 
+            $spotifyData['genres'],
+            $spotifyData['href'],
+            $spotifyData['images'][0]['url'] ?? '',
+            $spotifyData['name'],
+            $spotifyData['popularity'],
+            $spotifyData['type'],
+            $spotifyData['uri']
+        );
 
         return $artist;
     }
-
 }

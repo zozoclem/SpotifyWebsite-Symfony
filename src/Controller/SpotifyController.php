@@ -6,6 +6,7 @@ use App\Entity\Artist;
 use App\Entity\Track;
 use App\Factory\ArtistFactory;
 use App\Factory\TrackFactory;
+use App\Repository\ArtistRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -282,29 +283,34 @@ public function removeFavoriteTrack(Request $request, TrackRepository $trackRepo
 }
 
 #[Route(path: '/favorite/artist/add', name: 'favorite_artist_add', methods: ['POST'])]
-public function addFavoriteArtist(Request $request, EntityManagerInterface $em): Response
+public function addFavoriteArtist(Request $request,ArtistRepository $artistRepository, EntityManagerInterface $em): Response
+
 {
     $user = $this->getUser();
     $artistId = $request->request->get('artist_id');
-    $artist = $this->getSpotifyArtist($artistId);
+    $artist = $artistRepository->findOneByArtistID($artistId);
 
-    if (!$user->hasArtist($artistId)) {
-        $user->addArtist($artist);
-        $em->persist($user);
-        $em->flush();
+    if (!$artist) {
+        $artist = $this->getSpotifyArtist($artistId);
+        $em->persist($artist);
     }
+
+    $user->addArtist($artist);
+
+    $em->persist($user);
+    $em->flush();
 
     return $this->redirectToRoute('app_spotify');
 }
 
 #[Route(path: '/favorite/artist/remove', name: 'favorite_artist_remove', methods: ['POST'])]
-public function removeFavoriteArtist(Request $request, EntityManagerInterface $em): Response
+public function removeFavoriteArtist(Request $request, ArtistRepository $artistRepository, EntityManagerInterface $em): Response
 {
     $user = $this->getUser();
     $artistId = $request->request->get('artist_id');
-    $artist = $this->getSpotifyArtist($artistId);
+    $artist = $artistRepository->findOneByArtistID($artistId);
 
-    if ($user->hasArtist($artistId)) {
+    if ($artist && $user->getArtists()->contains($artist)) {
         $user->removeArtist($artist);
         $em->persist($user);
         $em->flush();
@@ -317,10 +323,12 @@ public function removeFavoriteArtist(Request $request, EntityManagerInterface $e
     public function index(): Response
     {
         $user = $this->getUser();
-        $userFavorites = $user ? $user->getTracks() : [];
+        $userTrackFavorites = $user ? $user->getTracks() : [];
+        $userArtistFavorites = $user ? $user->getArtists() : [];
     
         return $this->render('spotify/index.html.twig', [
-            'user_favorites' => $userFavorites,
+            'user_favorites_tracks' => $userTrackFavorites,
+            'user_favorites_artists' => $userArtistFavorites,
         ]);
         
     }

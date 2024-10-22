@@ -69,6 +69,26 @@
             height: auto;
             border-radius: 10px;
         }
+
+            
+        .favorite-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .favorite-buttons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .favorite-buttons button i {
+            font-size: 24px; 
+        }
+
+        .favorite-buttons button:hover {
+            transform: scale(1.2);
+            color: #1db954; 
+        }
     </style>
 {% endblock %}
 
@@ -86,6 +106,18 @@
                 {% for artist in artists %}
                     <a href="artist/{{ artist.id }}" class="artist">
                         <h2>{{ artist.name }}</h2>
+                            <div class="favorite-buttons">
+                            <form action="{{ path('favorite_artist_add') }}" method="post" style="display: inline;">
+                                <input type="hidden" name="artist_id" value="{{ artist.id }}">
+                                <button type="submit">
+                                    {% if app.user.hasArtist(artist.id) %}
+                                        <i class="fas fa-heart" style="color: #ff69b4;"></i>
+                                    {% else %}
+                                        <i class="far fa-heart" style="color: black;"></i>
+                                    {% endif %}
+                                </button>
+                            </form>
+                        </div>
                         <p>Abonnés : {{ artist.followers }}</p>
                         <p>Genres : {{ artist.genres|join(', ') }}</p>
                         {% if artist.images|length > 0 %}

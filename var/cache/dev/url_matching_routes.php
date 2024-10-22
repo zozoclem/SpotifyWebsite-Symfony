@@ -20,8 +20,10 @@ return [
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
         '/search-music' => [[['_route' => 'search_music', '_controller' => 'App\\Controller\\SpotifyController::searchMusic'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/search-artist' => [[['_route' => 'search_artist', '_controller' => 'App\\Controller\\SpotifyController::searchArtist'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        '/favorite/add' => [[['_route' => 'favorite_add', '_controller' => 'App\\Controller\\SpotifyController::addFavorite'], null, ['POST' => 0], null, false, false, null]],
-        '/favorite/remove' => [[['_route' => 'favorite_remove', '_controller' => 'App\\Controller\\SpotifyController::removeFavorite'], null, ['POST' => 0], null, false, false, null]],
+        '/favorite/track/add' => [[['_route' => 'favorite_track_add', '_controller' => 'App\\Controller\\SpotifyController::addFavoriteTrack'], null, ['POST' => 0], null, false, false, null]],
+        '/favorite/track/remove' => [[['_route' => 'favorite_track_remove', '_controller' => 'App\\Controller\\SpotifyController::removeFavoriteTrack'], null, ['POST' => 0], null, false, false, null]],
+        '/favorite/artist/add' => [[['_route' => 'favorite_artist_add', '_controller' => 'App\\Controller\\SpotifyController::addFavoriteArtist'], null, ['POST' => 0], null, false, false, null]],
+        '/favorite/artist/remove' => [[['_route' => 'favorite_artist_remove', '_controller' => 'App\\Controller\\SpotifyController::removeFavoriteArtist'], null, ['POST' => 0], null, false, false, null]],
         '/spotify' => [
             [['_route' => 'app_spotify', '_controller' => 'App\\Controller\\SpotifyController::index'], null, null, null, false, false, null],
             [['_route' => 'spotify', '_controller' => 'App\\Controller\\SpotifyController::index'], null, null, null, false, false, null],

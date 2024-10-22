@@ -18,7 +18,6 @@ class Album
     private array $artists;
     private string $albumGroup;
 
-    // Constructor
     public function __construct(
         string $albumType,
         int $totalTracks,
@@ -51,7 +50,6 @@ class Album
         $this->albumGroup = $albumGroup;
     }
 
-    // Getters and setters
     public function getAlbumType(): string
     {
         return $this->albumType;

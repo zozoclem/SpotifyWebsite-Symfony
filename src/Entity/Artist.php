@@ -2,37 +2,60 @@
 
 namespace App\Entity;
 
+use App\Repository\ArtistRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: ArtistRepository::class)]
 class Artist
 {
-    private string $externalUrls;
-    private string $followers;
-    private array $genres;
-    private string $href;
-    private string $id;
-    private string $images;
-    private string $name;
-    private int $popularity;
-    private string $type;
-    private string $uri;
+    #[ORM\Id]
+    #[ORM\Column(type: "string", length: 255)]
+    private $id;
 
-    // Constructor
+    #[ORM\Column(type: "string", length: 255)]
+    private $externalUrls;
+
+    #[ORM\Column(type: "integer")]
+    private $followers;
+
+    #[ORM\Column(type: "json")]
+    private $genres = [];
+
+    #[ORM\Column(type: "string", length: 255)]
+    private $href;
+
+    #[ORM\Column(type: "string", length: 255)]
+    private $images;
+
+    #[ORM\Column(type: "string", length: 255)]
+    private $name;
+
+    #[ORM\Column(type: "integer")]
+    private $popularity;
+
+    #[ORM\Column(type: "string", length: 255)]
+    private $type;
+
+    #[ORM\Column(type: "string", length: 255)]
+    private $uri;
+
     public function __construct(
+        string $id,
         string $externalUrls,
-        string $followers,
+        int $followers,
         array $genres,
         string $href,
-        string $id,
         string $images,
         string $name,
         int $popularity,
         string $type,
         string $uri
     ) {
+        $this->id = $id;
         $this->externalUrls = $externalUrls;
         $this->followers = $followers;
         $this->genres = $genres;
         $this->href = $href;
-        $this->id = $id;
         $this->images = $images;
         $this->name = $name;
         $this->popularity = $popularity;
@@ -40,14 +63,17 @@ class Artist
         $this->uri = $uri;
     }
 
-    // Getters
+    public function getId(): string
+    {
+        return $this->id;
+    }
 
     public function getExternalUrls(): string
     {
         return $this->externalUrls;
     }
 
-    public function getFollowers(): string
+    public function getFollowers(): int
     {
         return $this->followers;
     }
@@ -60,11 +86,6 @@ class Artist
     public function getHref(): string
     {
         return $this->href;
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     public function getImages(): string
@@ -90,5 +111,65 @@ class Artist
     public function getUri(): string
     {
         return $this->uri;
+    }
+
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setExternalUrls(string $externalUrls): self
+    {
+        $this->externalUrls = $externalUrls;
+        return $this;
+    }
+
+    public function setFollowers(int $followers): self
+    {
+        $this->followers = $followers;
+        return $this;
+    }
+
+    public function setGenres(array $genres): self
+    {
+        $this->genres = $genres;
+        return $this;
+    }
+
+    public function setHref(string $href): self
+    {
+        $this->href = $href;
+        return $this;
+    }
+
+    public function setImages(string $images): self
+    {
+        $this->images = $images;
+        return $this;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function setPopularity(int $popularity): self
+    {
+        $this->popularity = $popularity;
+        return $this;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    public function setUri(string $uri): self
+    {
+        $this->uri = $uri;
+        return $this;
     }
 }

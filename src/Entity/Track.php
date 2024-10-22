@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use App\Repository\TrackRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: TrackRepository::class)]
 #[ORM\Table(name: 'tracks')]
 class Track
 {

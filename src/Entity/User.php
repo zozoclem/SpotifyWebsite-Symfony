@@ -135,6 +135,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
+    public function getArtists(): Collection
+    {
+        return $this->artists;
+    }
+
     public function addArtist(Artist $artist): static
 {
     if (!$this->artists->contains($artist)) {

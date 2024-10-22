@@ -11,12 +11,12 @@
             font-size: 24px;
             margin-bottom: 20px;
         }
-        .track-list {
+        .track-list, .artist-list {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
         }
-        .track {
+        .track, .artist {
             padding: 20px;
             border-radius: 10px;
             text-align: center;
@@ -26,22 +26,18 @@
             position: relative;
             transition: background-color 0.3s ease;
         }
-        .track:hover {
+        .track:hover, .artist:hover {
             background-color: #333232;
         }
-        .track img {
+        .track img, .artist img {
             max-width: 100%;
             height: auto;
             border-radius: 10px;
         }
-        .track-name {
+        .track-name, .artist-name {
             font-size: 18px;
             margin: 10px 0;
             color: #fff;
-        }
-        .artist-name {
-            font-size: 14px;
-            color: #666;
         }
         .remove-button {
             background: none;
@@ -63,9 +59,11 @@
 {% block body %}
     <div class="favorites">
         <h2>Mes Favoris</h2>
-        {% if user_favorites is not empty %}
+        
+        <h3>Musiques</h3>
+        {% if user_favorites_tracks is not empty %}
             <div class="track-list">
-                {% for track in user_favorites %}
+                {% for track in user_favorites_tracks %}
                     <a href="music/{{ track.id }}" class="track">
                         <form action="{{ path('favorite_track_remove') }}" method="post" style="display: inline;">
                             <input type="hidden" name="track_id" value="{{ track.id }}">
@@ -77,6 +75,28 @@
                             <img src="{{ track.pictureLink }}" alt="{{ track.name }}">
                         {% endif %}
                         <div class="track-name">{{ track.name }}</div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Vous n'avez pas encore de favoris.</p>
+        {% endif %}
+        
+        <h3>Artistes</h3>
+        {% if user_favorites_artists is not empty %}
+            <div class="artist-list">
+                {% for artist in user_favorites_artists %}
+                    <a href="artist/{{ artist.id }}" class="artist">
+                        <form action="{{ path('favorite_artist_remove') }}" method="post" style="display: inline;">
+                            <input type="hidden" name="artist_id" value="{{ artist.id }}">
+                            <button type="submit" class="remove-button">
+                                <i class="fas fa-heart" style="color: #ff69b4;"></i>
+                            </button>
+                        </form>
+                        {% if artist.images|length > 0 %}
+                            <img src="{{ artist.images }}" alt="{{ artist.name }}">
+                        {% endif %}
+                        <div class="artist-name">{{ artist.name }}</div>
                     </a>
                 {% endfor %}
             </div>
