@@ -68,8 +68,8 @@ class ArtistController extends AbstractController
         ]);
     }
 
-    //Ajoute un artiste aux favoris
     #[Route(path: '/favorite/artist/add', name: 'favorite_artist_add', methods: ['POST'])]
+    //Ajoute un artiste aux favoris
     public function addFavoriteArtist(Request $request, ArtistRepository $artistRepository, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
