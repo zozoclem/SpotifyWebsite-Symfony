@@ -232,8 +232,21 @@ class SpotifyController extends AbstractController
         ]);
     }
 
-#[Route(path: '/favorite/add', name: 'favorite_add', methods: ['POST'])]
-public function addFavorite(Request $request, TrackRepository $trackRepository, EntityManagerInterface $em): Response
+
+#[Route(path: '/artist/{id}', name: 'artist_info')]
+public function getArtistInfo(string $id): Response
+{
+    $artist = $this->getSpotifyArtist($id);
+    $albums = $this->getSpotifyArtistAlbums($id);
+
+    return $this->render('spotify/artist.html.twig', [
+        'artist' => $artist,
+        'albums' => $albums,
+    ]);
+}
+
+#[Route(path: '/favorite/track/add', name: 'favorite_track_add', methods: ['POST'])]
+public function addFavoriteTrack(Request $request, TrackRepository $trackRepository, EntityManagerInterface $em): Response
 {
     $user = $this->getUser();
     $trackId = $request->request->get('track_id');
@@ -252,34 +265,52 @@ public function addFavorite(Request $request, TrackRepository $trackRepository, 
     return $this->redirectToRoute('app_spotify');
 }
 
+#[Route(path: '/favorite/track/remove', name: 'favorite_track_remove', methods: ['POST'])]
+public function removeFavoriteTrack(Request $request, TrackRepository $trackRepository, EntityManagerInterface $em): Response
+{
+    $user = $this->getUser();
+    $trackId = $request->request->get('track_id');
+    $track = $trackRepository->findOneByTrackID($trackId);
 
-    #[Route(path: '/favorite/remove', name: 'favorite_remove', methods: ['POST'])]
-    public function removeFavorite(Request $request, TrackRepository $trackRepository, EntityManagerInterface $em): Response
-    {
-        $user = $this->getUser();
-        $trackId = $request->request->get('track_id');
-        $track = $trackRepository->findOneByTrackID($trackId);
-
-        if ($track && $user->getTracks()->contains($track)) {
-            $user->removeTrack($track);
-            $em->persist($user);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('app_spotify');
+    if ($track && $user->getTracks()->contains($track)) {
+        $user->removeTrack($track);
+        $em->persist($user);
+        $em->flush();
     }
 
+    return $this->redirectToRoute('app_spotify');
+}
 
-#[Route(path: '/artist/{id}', name: 'artist_info')]
-public function getArtistInfo(string $id): Response
+#[Route(path: '/favorite/artist/add', name: 'favorite_artist_add', methods: ['POST'])]
+public function addFavoriteArtist(Request $request, EntityManagerInterface $em): Response
 {
-    $artist = $this->getSpotifyArtist($id);
-    $albums = $this->getSpotifyArtistAlbums($id);
+    $user = $this->getUser();
+    $artistId = $request->request->get('artist_id');
+    $artist = $this->getSpotifyArtist($artistId);
 
-    return $this->render('spotify/artist.html.twig', [
-        'artist' => $artist,
-        'albums' => $albums,
-    ]);
+    if (!$user->hasArtist($artistId)) {
+        $user->addArtist($artist);
+        $em->persist($user);
+        $em->flush();
+    }
+
+    return $this->redirectToRoute('app_spotify');
+}
+
+#[Route(path: '/favorite/artist/remove', name: 'favorite_artist_remove', methods: ['POST'])]
+public function removeFavoriteArtist(Request $request, EntityManagerInterface $em): Response
+{
+    $user = $this->getUser();
+    $artistId = $request->request->get('artist_id');
+    $artist = $this->getSpotifyArtist($artistId);
+
+    if ($user->hasArtist($artistId)) {
+        $user->removeArtist($artist);
+        $em->persist($user);
+        $em->flush();
+    }
+
+    return $this->redirectToRoute('app_spotify');
 }
 
     #[Route(path: '/spotify', name: 'app_spotify')]

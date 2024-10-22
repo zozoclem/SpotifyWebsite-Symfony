@@ -34,6 +34,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Track::class)]
     private Collection $tracks;
 
+     #[ORM\ManyToMany(targetEntity: Artist::class)]
+    private Collection $artists;
+
     public function __construct()
     {
         $this->tracks = new ArrayCollection();
@@ -131,6 +134,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return false;
     }
 
+
+    public function addArtist(Artist $artist): static
+{
+    if (!$this->artists->contains($artist)) {
+        $this->artists->add($artist);
+    }
+
+    return $this;
+}
+
+public function hasArtist(string $artistId): bool
+{
+    foreach ($this->artists as $userArtist) {
+        if ($userArtist->getId() === $artistId) {
+            return true;
+        }
+    }
+    return false;
+}
+
+public function removeArtist(Artist $artist): static
+{
+    $this->artists->removeElement($artist);
+
+    return $this;
+}
 
     public function eraseCredentials(): void
     {

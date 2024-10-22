@@ -128,7 +128,7 @@
                     <a href="music/{{ track.id }}" class="track">
                         <h2>{{ track.name }}</h2>
                         <div class="favorite-buttons">
-                            <form action="{{ path('favorite_add') }}" method="post" style="display: inline;">
+                            <form action="{{ path('favorite_track_add') }}" method="post" style="display: inline;">
                                 <input type="hidden" name="track_id" value="{{ track.id }}">
                                 <button type="submit">
                                     {% if app.user.hasTrack(track.id) %}

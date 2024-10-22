@@ -67,7 +67,7 @@
             <div class="track-list">
                 {% for track in user_favorites %}
                     <a href="music/{{ track.id }}" class="track">
-                        <form action="{{ path('favorite_remove') }}" method="post" style="display: inline;">
+                        <form action="{{ path('favorite_track_remove') }}" method="post" style="display: inline;">
                             <input type="hidden" name="track_id" value="{{ track.id }}">
                             <button type="submit" class="remove-button">
                                 <i class="fas fa-heart" style="color: #ff69b4;"></i>
